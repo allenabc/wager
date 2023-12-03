@@ -1,6 +1,6 @@
-import pymysql.cursors
 import datetime
-
+import pymysql
+import os
 
 def create_cursor():
     connection = pymysql.connect(host='localhost', user='allen', password='Vagrant',
