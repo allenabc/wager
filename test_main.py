@@ -84,7 +84,7 @@ class Test(TestCase):
         url = "https://az.unibet.com/#sports-hub/ice_hockey/nhl"
         url = "https://sports.az.betmgm.com/en/sports/hockey-12/betting/usa-9/nhl-34"
         url = "https://sportsbook.draftkings.com/leagues/hockey/nhl"
-        pickle = "draftkins"
+        pickle = "draftkings"
         pickle_file = pickle+".pickle"
         if os.path.isfile(pickle_file):
             os.remove(pickle_file)
