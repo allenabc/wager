@@ -2,6 +2,7 @@ import datetime
 import pymysql
 import os
 
+
 def create_cursor():
     connection = pymysql.connect(host='localhost', user='allen', password='Vagrant',
                                  database='trader', cursorclass=pymysql.cursors.DictCursor)
