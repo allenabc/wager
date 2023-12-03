@@ -75,7 +75,8 @@ class Test(TestCase):
 
     def test_download_save(self):
         pickle_file = "ibm.pickle"
-        os.remove(pickle_file)
+        if os.path.isfile(pickle_file):
+            os.remove(pickle_file)
         url = "https://www.ibm.com/us-en"
         download_website_and_save(url, "ibm")
         file_stats = os.stat(pickle_file)
