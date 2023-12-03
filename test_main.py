@@ -16,8 +16,10 @@ class Test(TestCase):
     @unittest.skip("Skip access_website")
     def test_access_website(self):
         url = "https://www.ibm.com/"
+        url = "https://az.unibet.com/#sports-hub/ice_hockey/nhl"
         expecting = "College Football Computer Picks"
         expecting = "IBM"
+        expecting = "<title>Unibet</title>"
         # returns a soup object
         title = str(access_website(url).title)
         print("Title is ***{}***".format(title))
@@ -27,11 +29,13 @@ class Test(TestCase):
     def test_pickle(self):
         # Download website into pickle file
         url = "https://www.ibm.com/"
+        url = "https://az.unibet.com/#sports-hub/ice_hockey/nhl"
         fn = "ibm"
         test_file = "ibm.pickle"
+        test_file = "unibet.pickle"
         if os.path.isfile(test_file):
             os.remove(test_file)
-        access_to_pickle(url, test_file)
+        access_pickle(url)
         file_stats = os.stat(test_file)
         print(file_stats.st_size)
         self.assertTrue(os.path.isfile(test_file))
@@ -65,22 +69,28 @@ class Test(TestCase):
         soup_obj = access_pickle(fn)
         self.assertIsInstance(soup_obj, bs4.BeautifulSoup)
 
-    @unittest.skip("Skip process_sport_soup")
-    def test_process_sport_soup(self):
+    @unittest.skip("Skip soup_to_list")
+    def test_soup_to_list(self):
         pickle_file = "hockey.pickle"
         sport = "hockey"
         sport, teams, times, dates, scores, totals = convert_soup_to_lists(pickle_file, sport)
         self.assertTrue(len(totals) > 5)
         pass
 
+    #@unittest.skip("Skip download_save")
     def test_download_save(self):
-        pickle_file = "ibm.pickle"
+
+        url = "https://www.ibm.com/us-en"
+        url = "https://az.unibet.com/#sports-hub/ice_hockey/nhl"
+        url = "https://sports.az.betmgm.com/en/sports/hockey-12/betting/usa-9/nhl-34"
+        url = "https://sportsbook.draftkings.com/leagues/hockey/nhl"
+        pickle = "draftkins"
+        pickle_file = pickle+".pickle"
         if os.path.isfile(pickle_file):
             os.remove(pickle_file)
-        url = "https://www.ibm.com/us-en"
-        download_website_and_save(url, "ibm")
+        download_website_and_save(url, pickle)
         file_stats = os.stat(pickle_file)
         self.assertTrue(os.path.isfile(pickle_file))
-        print("*** Downloaded {} {} ***".format(pickle_file,file_stats.st_size))
-        self.assertTrue(file_stats.st_size > 10000)
+        print("*** Downloaded {} {} ***".format(pickle_file, file_stats.st_size))
+        self.assertTrue(file_stats.st_size > 800)
 
